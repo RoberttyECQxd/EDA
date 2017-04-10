@@ -8,7 +8,7 @@ import br.ufc.quixada.eda.grafo.Grafo;
 
 public class ArvoreGeradoraMinima {
 	
-	// Robertty e Tassiane 
+	
 	public ArrayList<Aresta> Kruskal(Grafo g){
 		FlorestaDeConjuntoDisjunto f = new FlorestaDeConjuntoDisjunto(g.getTotalVertice());
 		f.construir();

@@ -1,45 +1,45 @@
-package br.ufc.quixada.eda.hash;
+package br.ufc.quixada.eda.listaencadeada;
 
-public class Listaencadeada {
+public class Listaencadeada<T> {
 	
-	protected NO head = null;
+	protected NO<T> head = null;
 	
-	public void inserir(int chave, String valor){
-		if(head == null) head = new NO(chave, valor);
+	public void inserir(int chave, T valor){
+		if(head == null) head = new NO<T>(chave, valor);
 		else{
-			NO aux = GetUltimoNO();
-			NO inserir = new NO(chave, valor);
+			NO<T> aux = GetUltimoNO();
+			NO<T> inserir = new NO<T>(chave, valor);
 			aux.setProximo(inserir);
 		}
 	}
 	
-	public String remover(int chave){
-		if(head == null) return "";
+	public T remover(int chave){
+		if(head == null) return null;
 		if(head.getChave() == chave) head = head.getProximo();
-		NO aux = head;
+		NO<T> aux = head;
 		while(aux.getProximo() != null &&  aux.getProximo().getChave() != chave) aux = aux.getProximo();
-		if(aux.getProximo() == null) return "";
-		String result = aux.getProximo().getValor();
+		if(aux.getProximo() == null) return null;
+		T result = aux.getProximo().getValor();
 		aux.setProximo(aux.getProximo().getProximo());
 		return result;
 	}
 	
-	public String buscar(int chave){
-		String retorno = null;
-		NO aux = head;
+	public T buscar(int chave){
+		T retorno = null;
+		NO<T> aux = head;
 		while(aux != null &&  aux.getChave() != chave) aux = aux.getProximo();
 		if(aux != null) retorno = aux.getValor();
 		return retorno;
 	}
 	
-	private NO GetUltimoNO(){
-		NO aux = head;
+	private NO<T> GetUltimoNO(){
+		NO<T> aux = head;
 		while(aux.getProximo() != null) aux = aux.getProximo();
 		return aux;
 	}
 	
 	public void mostrar(){
-		NO aux = head;
+		NO<T> aux = head;
 		while(aux != null){
 			System.out.println(aux.getChave() + " - " + aux.getValor());
 			aux = aux.getProximo();

@@ -1,12 +1,12 @@
 package br.ufc.quixada.eda.hash;
 
-public class NOHash {
+public class NOHash<T> {
 	
 	private Integer chave = 0;
 	private int proximo = -1;
-	private String valor;
+	private T valor;
 	
-	public NOHash (Integer chave, String valor){
+	public NOHash (Integer chave, T valor){
 		this.setChave(chave);
 		this.setValor(valor);
 	}
@@ -27,11 +27,11 @@ public class NOHash {
 		this.proximo = proximo;
 	}
 
-	public String getValor() {
+	public T getValor() {
 		return valor;
 	}
 
-	public void setValor(String valor) {
+	public void setValor(T valor) {
 		this.valor = valor;
 	}
 	

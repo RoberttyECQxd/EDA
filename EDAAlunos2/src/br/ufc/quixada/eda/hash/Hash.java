@@ -1,6 +1,6 @@
 package br.ufc.quixada.eda.hash;
 
-public abstract class Hash {
+public abstract class Hash<T> {
 	protected Integer m = 0;
 	
 	protected Hash(int tam){
@@ -12,8 +12,8 @@ public abstract class Hash {
 	}
 	
 	
-	protected abstract void inserir (Integer chave, String valor);
-	protected abstract String buscar (Integer chave);
-	protected abstract String remover (Integer chave);
+	protected abstract void inserir (Integer chave, T valor);
+	protected abstract T buscar (Integer chave);
+	protected abstract T remover (Integer chave);
 	
 }

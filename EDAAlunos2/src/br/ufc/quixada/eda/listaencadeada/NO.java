@@ -1,12 +1,12 @@
-package br.ufc.quixada.eda.hash;
+package br.ufc.quixada.eda.listaencadeada;
 
-public class NO {
+public class NO<T> {
 	
 	private Integer chave = 0;
-	private NO proximo = null;
-	private String valor;
+	private NO<T> proximo = null;
+	private T valor;
 	
-	public NO (Integer chave, String valor){
+	public NO (Integer chave, T valor){
 		this.setChave(chave);
 		this.setValor(valor);
 	}
@@ -19,19 +19,19 @@ public class NO {
 		this.chave = chave;
 	}
 
-	public NO getProximo() {
+	public NO<T> getProximo() {
 		return proximo;
 	}
 
-	public void setProximo(NO proximo) {
+	public void setProximo(NO<T> proximo) {
 		this.proximo = proximo;
 	}
 
-	public String getValor() {
+	public T getValor() {
 		return valor;
 	}
 
-	public void setValor(String valor) {
+	public void setValor(T valor) {
 		this.valor = valor;
 	}
 	

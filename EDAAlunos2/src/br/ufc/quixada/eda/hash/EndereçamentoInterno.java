@@ -1,15 +1,15 @@
 package br.ufc.quixada.eda.hash;
 
-public class EndereçamentoInterno extends Hash {
+public class EndereçamentoInterno<T> extends Hash<T> {
 	
 	private int p = 0;
-	private NOHash vetor[] = null;
+	private NOHash<T> vetor[] = null;
 	
 	protected EndereçamentoInterno(int tam) {
 		super(tam);
 		p = (int) (tam * 0.7);
-		vetor = new NOHash[tam];
-		for (int i = 0; i < m; i++) vetor[i] = new NOHash(-1, "");
+		vetor = (NOHash<T>[]) new NOHash[tam];
+		for (int i = 0; i < m; i++) vetor[i] = (NOHash<T>) new NOHash(-1, null);
 	}
 	
 	protected Integer fHash(Integer chave){
@@ -17,7 +17,7 @@ public class EndereçamentoInterno extends Hash {
 	}
 
 	@Override
-	protected void inserir(Integer chave, String valor) {
+	protected void inserir(Integer chave, T valor) {
 		int indice = fHash(chave);
 		if(vetor[indice].getChave() == -1){
 			vetor[indice].setChave(chave);
@@ -31,11 +31,12 @@ public class EndereçamentoInterno extends Hash {
 		vetor[i].setValor(valor);
 		while(vetor[indice].getProximo() != -1)
 			indice = vetor[indice].getProximo();
+		if(indice == m) throw new ErroHash("Erro ao tentar inserir");
 		vetor[indice].setProximo(i);
 	}
 
 	@Override
-	protected String buscar(Integer chave) {
+	protected T buscar(Integer chave) {
 		int indice = fHash(chave);
 		while(vetor[indice].getChave() != chave)
 			indice = vetor[indice].getProximo();
@@ -43,8 +44,8 @@ public class EndereçamentoInterno extends Hash {
 	}
 
 	@Override
-	protected String remover(Integer chave) {
-		String result = null;
+	protected T remover(Integer chave) {
+		T result = null;
 		int indice = fHash(chave);
 		if(vetor[indice].getChave() == chave){
 			result = vetor[indice].getValor();
@@ -54,11 +55,11 @@ public class EndereçamentoInterno extends Hash {
 				vetor[indice].setProximo(vetor[proxIndice].getProximo());
 				vetor[indice].setValor(vetor[proxIndice].getValor());
 				vetor[proxIndice].setChave(-1);
-				vetor[proxIndice].setValor("");
+				vetor[proxIndice].setValor(null);
 				vetor[proxIndice].setProximo(-1);
 			}else{
 				vetor[indice].setChave(-1);
-				vetor[indice].setValor("");
+				vetor[indice].setValor(null);
 			}
 		}else{
 			int ant = -1;
@@ -70,7 +71,7 @@ public class EndereçamentoInterno extends Hash {
 			result = vetor[indice].getValor();
 			vetor[indice].setChave(-1);
 			vetor[indice].setProximo(-1);
-			vetor[indice].setValor("");
+			vetor[indice].setValor(null);
 		}
 		return result;
 	}

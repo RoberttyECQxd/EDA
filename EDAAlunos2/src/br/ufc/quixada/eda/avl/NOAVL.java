@@ -1,11 +1,12 @@
 package br.ufc.quixada.eda.avl;
 
-public class NOAVL {
+public class NOAVL <T> {
 	
 	private int valor;
 	private int altura;
-	private NOAVL direito;
-	private NOAVL esquerdo;
+	private NOAVL<T> direito;
+	private NOAVL<T> esquerdo;
+	private T infor;
 	
 	public NOAVL(int valor) {
 		this.valor = valor;
@@ -18,16 +19,16 @@ public class NOAVL {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
-	public NOAVL getDireito() {
+	public NOAVL<T> getDireito() {
 		return direito;
 	}
-	public void setDireito(NOAVL direito) {
+	public void setDireito(NOAVL<T> direito) {
 		this.direito = direito;
 	}
-	public NOAVL getEsquerdo() {
+	public NOAVL<T> getEsquerdo() {
 		return esquerdo;
 	}
-	public void setEsquerdo(NOAVL esquerdo) {
+	public void setEsquerdo(NOAVL<T> esquerdo) {
 		this.esquerdo = esquerdo;
 	}
 
@@ -37,6 +38,14 @@ public class NOAVL {
 
 	public void setAltura(int altura) {
 		this.altura = altura;
+	}
+
+	public T getInfor() {
+		return infor;
+	}
+
+	public void setInfor(T infor) {
+		this.infor = infor;
 	}
 	
 }

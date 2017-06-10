@@ -1,16 +1,16 @@
 package br.ufc.quixada.eda.avl;
 
-public class Arvoreavl {
+public class Arvoreavl <T> {
 	
-	private NOAVL raiz = null;
+	private NOAVL<T> raiz = null;
 	
 	void inserir(int value){
 		raiz = inserir1(raiz, value);
 	}
 	
-	NOAVL inserir1(NOAVL no, int value){
+	NOAVL<T> inserir1(NOAVL<T> no, int value){
 		if(no == null){
-			no = new NOAVL(value);
+			no = new NOAVL<T>(value);
 			return no;
 		}else if(raiz.getValor() > value){
 			no.setEsquerdo(inserir1(no.getEsquerdo(), value));
@@ -31,16 +31,16 @@ public class Arvoreavl {
 				}
 			}
 		}
-		no.setAltura(((altura(no.getDireito()) > altura(no.getDireito())) ? altura(no.getDireito()) : (altura(no.getEsquerdo()))) + 1);
+		no.setAltura(((altura(no.getDireito()) > altura(no.getEsquerdo())) ? altura(no.getDireito()) : (altura(no.getEsquerdo()))) + 1);
 		return no;
 	}
 	
-	int altura(NOAVL no){
+	int altura(NOAVL<T> no){
 		return (no != null ? no.getAltura() : 0);
 	}
 	
-	NOAVL rotacaosimplesDireita(NOAVL no){
-		NOAVL aux = no.getEsquerdo();
+	NOAVL<T> rotacaosimplesDireita(NOAVL<T> no){
+		NOAVL<T> aux = no.getEsquerdo();
 		no.setEsquerdo(no.getEsquerdo().getDireito());
 		aux.setDireito(no);
 		no.setAltura((altura(no.getDireito()) > altura(no.getDireito()) ? altura(no.getDireito()) : (altura(no.getEsquerdo())) + 1));
@@ -48,8 +48,8 @@ public class Arvoreavl {
 		return aux;
 	}
 	
-	NOAVL rotacaosimplesEsquerda(NOAVL no){
-		NOAVL aux = no.getDireito();
+	NOAVL<T> rotacaosimplesEsquerda(NOAVL<T> no){
+		NOAVL<T> aux = no.getDireito();
 		no.setDireito(no.getDireito().getEsquerdo());
 		aux.setEsquerdo(no);
 		no.setAltura((altura(no.getDireito()) > altura(no.getDireito()) ? altura(no.getDireito()) : (altura(no.getEsquerdo())) + 1));
@@ -57,19 +57,19 @@ public class Arvoreavl {
 		return aux;
 	}
 	
-	NOAVL rotacaoduplaDireita(NOAVL no){
+	NOAVL<T> rotacaoduplaDireita(NOAVL<T> no){
 		no.setEsquerdo(rotacaosimplesEsquerda(no));
 		no = rotacaosimplesDireita(no);
 		return no;
 	}
 	
-	NOAVL rotacaoduplaEsquerda(NOAVL no){
+	NOAVL<T> rotacaoduplaEsquerda(NOAVL<T> no){
 		no.setDireito(rotacaosimplesDireita(no));
 		no = rotacaosimplesEsquerda(no);
 		return no;
 	}
 	
-	boolean busca1(NOAVL no, int value){
+	boolean busca1(NOAVL<T> no, int value){
 		if(no == null) return false;
 		return ((no.getValor() == value) || busca1(no.getDireito(), value) || busca1(no.getEsquerdo(), value));
 	}
@@ -78,7 +78,7 @@ public class Arvoreavl {
 		return busca1(raiz, value);
 	}
 	
-	void mostrar1(NOAVL no){
+	void mostrar1(NOAVL<T> no){
 		if(no == null){
 			System.out.print(" # ");
 			return;
